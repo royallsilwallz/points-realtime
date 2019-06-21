@@ -1,0 +1,18 @@
+extends layout
+
+block content
+
+   script.
+
+      var socket = io();
+
+      $.getJSON('/data', function(data) {
+         for(item of data) {
+            L.marker([item.lat, item.lng]).addTo(mymap)
+         }
+      })
+
+      socket.on('add', function(data){
+         L.marker(data).addTo(mymap)
+      });
+

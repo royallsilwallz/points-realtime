@@ -1,0 +1,26 @@
+extends layout
+
+block content
+
+   script. 
+
+      var socket = io();
+
+      function onMapClick(e) {
+            var points = [e.latlng.lat, e.latlng.lng] 
+            var lat = parseFloat(e.latlng.lat)
+            var lng = parseFloat(e.latlng.lng)
+
+            L.marker(points).addTo(mymap);
+
+            $.post('/add', {
+               lat: lat,
+               lng: lng
+            })
+      }
+
+      
+      mymap.on('click', onMapClick);
+
+   
+
